@@ -10,5 +10,10 @@ gem'minitest-rg',  '~>  5.0'
 
 #Google Cloud API
 gem'google-cloud-language'
+gem'google-cloud-translate'
 
-gem'openssl'
+
+#Upsplash
+gem 'unsplash'
+
+

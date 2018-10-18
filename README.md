@@ -1,6 +1,13 @@
-MOTC APT test:
-https://ptx.transportdata.tw/MOTC/Swagger/?Area=Application#
+Library usage:
 
-MOTC API Document link:
-https://ptxmotc.gitbooks.io/ptx-api-documentation/content/
 
+include SeoAssistant
+a = Unsplash_API.new("dog")
+b = a.get_picture.url
+> <picture_link>
+
+
+include SeoAssistant
+a = Translate.new("狗")
+puts a.process
+> "dog"
