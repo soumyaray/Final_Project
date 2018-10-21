@@ -11,8 +11,8 @@ Finally, SeoAssistant will pull the link of pictures which are online and have n
 We hope this application can help some content designer more easier to understand other article and generate attractive picture to make a report or article.
 
 Here are the links of APIs we use:
-[Unsplash Developers](https://unsplash.com/developers)
-[Cloud Natural Langrage](https://cloud.google.com/natural-language/docs/quickstart-client-libraries#client-libraries-usage-ruby) 
+[Unsplash Developers,](https://unsplash.com/developers)
+[Cloud Natural Langrage,](https://cloud.google.com/natural-language/docs/quickstart-client-libraries#client-libraries-usage-ruby) 
 [Cloud Translation](https://cloud.google.com/translate/docs/quickstart-client-libraries)
 
 ## Usability goals
