@@ -36,15 +36,31 @@ $ export GOOGLE_APPLICATION_CREDENTIALS= "config/google_credential.json"
 **Search a picture with keyword**
 ```ruby
 include SeoAssistant
-a = Unsplash_API.new("dog")
-b = a.get_picture.url
+search_pic = Unsplash_API.new("dog")
+puts search_pic.get_picture.url
 ```
 > <picture_link>
 
 **Translate to English**
 ```ruby
 include SeoAssistant
-a = Translate.new("狗")
-puts a.process
+translate_word = Translate.new("狗")
+puts translate_word.process
 ```
 > "dog"
+
+**Analyze article**
+```ruby
+include SeoAssistant
+article = "Google, headquartered in Mountain View, unveiled the new Android phone at the Consumer Electronic Show./
+            Sundar Pichai said in his keynote that users love their new Android phones."
+analyze_article = Analyze.new(article)
+puts analyze_article.process.keyword
+puts analyze_article.process.type
+puts analyze_article.process.importance
+```
+> Google   users   phone   Android   Sundar Pichai   Mountain View   Consumer Electronic Show   phones   keynote
+
+> ORGANIZATION   PERSON   CONSUMER_GOOD   CONSUMER_GOOD   PERSON   LOCATION   EVENT   CONSUMER_GOOD   OTHER
+
+> 0.22637900710105896   0.191544771194458   0.18347220122814178   0.09827315807342529   0.09172182530164719   0.07637178152799606   0.05269023776054382   0.052234947681427   0.027312073856592
