@@ -1,18 +1,19 @@
 module SeoAssistant
+	# Model of Picture
 	class Picture
-		def initialize(pictures_data, num = 0)
-			@all_pictures = pictures_data['results']
-			@pictures = pictures_data['results'][0..num-1]
-			@picture = pictures_data['results'][0]
+		def initialize(pictures_data)
+			@pictures_data = pictures_data['results']
 		end
 
 		def url()
-			urls = @picture['urls']
+			picture = @pictures_data[0]
+			urls = picture['urls']
 			urls['raw']
 		end
 
-		def all_url()
-			all_urls = @pictures.map { |picture| picture['urls'] }
+		def all_url(num = 0)
+			pictures = @pictures_data[0..num-1]
+			all_urls = pictures.map { |picture| picture['urls'] }
 			all_url = all_urls.map { |url| url['raw'] }
 		end
 	end
