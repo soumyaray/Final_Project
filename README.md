@@ -60,5 +60,7 @@ puts analyze_article.process.type
 puts analyze_article.process.importance
 ```
 > Google   users   phone   Android   Sundar Pichai   Mountain View   Consumer Electronic Show   phones   keynote
+
 > ORGANIZATION   PERSON   CONSUMER_GOOD   CONSUMER_GOOD   PERSON   LOCATION   EVENT   CONSUMER_GOOD   OTHER
+
 > 0.22637900710105896   0.191544771194458   0.18347220122814178   0.09827315807342529   0.09172182530164719   0.07637178152799606   0.05269023776054382   0.052234947681427   0.027312073856592
