@@ -24,10 +24,14 @@ Here are the links of APIs we use:
 ## Usage:
 
 **Installation**
-` $ bundle install
+``` 
+$ bundle install
+```
 
 **Google path setting**
-` $ export GOOGLE_APPLICATION_CREDENTIALS= "config/google_credential.json"
+```
+$ export GOOGLE_APPLICATION_CREDENTIALS= "config/google_credential.json"
+```
 
 **Search a picture with keyword**
 ```ruby
