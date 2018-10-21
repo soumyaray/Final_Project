@@ -8,18 +8,18 @@ require 'vcr'
 require 'webmock'
 
 require_relative '../lib/unsplash_api.rb'
-#require_relative '../lib/translate_api.rb'
+require_relative '../lib/translate_api.rb'
 
 KEYWORD_C = "狗".freeze
 KEYWORD_E = "dog".freeze
 
-CONFIG = YAML.safe_load(File.read('../config/secrets.yml'))
-ASSCESS_KEY = CONFIG["UNSPLASH_ACESS_KEY"]
+CONFIG = YAML.safe_load(File.read('config/secrets.yml'))
+ACCESS_KEY = CONFIG["UNSPLASH_ACCESS_KEY"]
 SECRET_KEY = CONFIG["UNSPLASH_SECRET_KEY"]
 
-CORRECT = YAML.safe_load(File.read('fixtures/api_result.yml'))
+CORRECT = YAML.safe_load(File.read('spec/fixtures/api_result.yml'))
 
-CASSETTES_FOLDER = 'fixtures/cassettes'.freeze
+CASSETTES_FOLDER = 'spec/fixtures/cassettes'.freeze
 CASSETTE_FILE_UNSPLASH = 'unsplash_api'.freeze
 CASSETTE_FILE_TRANSLATE = 'translate_api'.freeze
 CASSETTE_FILE_NL = 'nl_api'.freeze

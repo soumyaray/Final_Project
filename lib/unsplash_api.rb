@@ -6,10 +6,11 @@ require_relative 'picture.rb'
 module SeoAssistant
     class Unsplash_API
 
-        def initialize(keyword_str)
-            config = YAML.safe_load(File.read('../config/secrets.yml'))
-            @unsplash_acess_key = config["UNSPLASH_ACESS_KEY"]
-            @unsplash_secret_key = config["UNSPLASH_SECRET_KEY"]
+        def initialize(access_key, keyword_str)
+            #config = YAML.safe_load(File.read('../config/secrets.yml'))
+            #@unsplash_access_key = config["UNSPLASH_ACCESS_KEY"]
+            #@unsplash_secret_key = config["UNSPLASH_SECRET_KEY"]
+            @unsplash_access_key = access_key
             @query = keyword_str
         end
 
@@ -17,21 +18,28 @@ module SeoAssistant
             'https://api.unsplash.com/' + '/search/photos?query=' + query
         end
 
-        def auth(acess_key)
-            "Client-ID " + acess_key
+        def auth(access_key)
+            "Client-ID " + access_key
         end
 
-        def call_unsplash_url(acess_key, url)
+        def call_unsplash_url(access_key, url)
             HTTP.headers(
-                'Authorization' =>  auth(acess_key),
+                'Authorization' =>  auth(access_key),
                 ).get(url)
         end
 
         def get_picture()
             url = unsplash_api_path(@query)
-            pictures_data = call_unsplash_url(@unsplash_acess_key, url).parse
+            pictures_data = call_unsplash_url(@unsplash_access_key, url).parse
             Picture.new(pictures_data)
             #pictures_data['results'][0]['urls']['raw']
         end
     end
 end
+
+#config = YAML.safe_load(File.read('../config/secrets.yml'))
+#access_key =  config["UNSPLASH_ACCESS_KEY"]
+
+#include SeoAssistant
+#search_pic = Unsplash_API.new(access_key,"dog")
+#puts search_pic.get_picture.url

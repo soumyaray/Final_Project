@@ -36,7 +36,7 @@ $ export GOOGLE_APPLICATION_CREDENTIALS= "config/google_credential.json"
 **Search a picture with keyword**
 ```ruby
 include SeoAssistant
-search_pic = Unsplash_API.new("dog")
+search_pic = Unsplash_API.new(<UNSPLASH_ACCESS_KEY>, "dog")
 puts search_pic.get_picture.url
 ```
 > <picture_link>
