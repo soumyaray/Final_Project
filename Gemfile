@@ -5,8 +5,18 @@ ruby '2.5.1'
 gem'http',  '~>  3.0'
 
 #Testing
-gem'minitest',  '~>  5.0'
-gem'minitest-rg',  '~>  5.0' 
+gem'minitest'
+gem'minitest-rg'
+gem'rake'
+gem'simplecov'
+gem'vcr'
+gem'webmock'
+
+# Quality testing gems
+gem'flog'
+gem'reek'
+gem'rubocop'
+
 
 #Google Cloud API
 gem'google-cloud-language'
