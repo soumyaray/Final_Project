@@ -26,4 +26,3 @@ gem'google-cloud-translate'
 #Upsplash
 gem 'unsplash'
 
-
