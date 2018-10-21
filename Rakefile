@@ -11,7 +11,7 @@ namespace :quality do
     end
 
     task :reek do
-        sh 'reel lib/'
+        sh 'reek lib/'
     end
 
     task :rubocop do 

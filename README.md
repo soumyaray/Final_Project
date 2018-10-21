@@ -39,7 +39,7 @@ include SeoAssistant
 search_pic = Unsplash_API.new(<UNSPLASH_ACCESS_KEY>, "dog")
 puts search_pic.get_picture.url
 ```
-> <picture_link>
+> <dog_picture_link>
 
 **Translate to English**
 ```ruby

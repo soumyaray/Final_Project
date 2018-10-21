@@ -5,7 +5,7 @@ describe 'Tests API library' do
         c.cassette_library_dir =  CASSETTES_FOLDER
         c.hook_into :webmock
 
-        c.filter_sensitive_data('<UNSPLASH_ASSCESS_KEY>') { ACCESS_KEY }
+        c.filter_sensitive_data('<UNSPLASH_ACCESS_KEY>') { ACCESS_KEY }
         c.filter_sensitive_data('<UNSPLASH_SECRET_KEY>') { SECRET_KEY }
     end
 
