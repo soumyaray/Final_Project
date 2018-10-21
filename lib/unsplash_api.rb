@@ -9,7 +9,7 @@ module SeoAssistant
         def initialize(keyword_str)
             config = YAML.safe_load(File.read('../config/secrets.yml'))
             @unsplash_acess_key = config["UNSPLASH_ACESS_KEY"]
-            @unsplash_secret = config["UNSPLASH_SECRET_KEY"]
+            @unsplash_secret_key = config["UNSPLASH_SECRET_KEY"]
             @query = keyword_str
         end
 
@@ -35,11 +35,3 @@ module SeoAssistant
         end
     end
 end
-
-
-
-
-
-
-
-
