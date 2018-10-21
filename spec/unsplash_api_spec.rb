@@ -25,5 +25,3 @@ describe 'Tests API library' do
         end
     end
 end
-
-
