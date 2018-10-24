@@ -25,3 +25,7 @@ gem'google-cloud-translate'
 
 # Upsplash
 gem 'unsplash'
+
+#Entity gems
+gem 'dry-struct', '~> 0.5'
+gem 'dry-types', '~> 0.5'
