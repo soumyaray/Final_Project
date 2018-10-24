@@ -1,5 +1,5 @@
 # S&S_SeoAssistant
-Application that allows users know keyword in any article and offer them pictures of each keyword.   
+Application that allows users know keyword in any article and offer them pictures of each keyword.
 
 ## Overview
 SeoAssistant can take the Chinese article pasted by user and analysize by using Google Cloud Natural Language API, which will come out "Entities" as the keyword of article.
@@ -12,19 +12,19 @@ We hope this application can help some content designer more easier to understan
 
 Here are the links of APIs we use:
 [Unsplash Developers,](https://unsplash.com/developers)
-[Cloud Natural Langrage,](https://cloud.google.com/natural-language/docs/quickstart-client-libraries#client-libraries-usage-ruby) 
+[Cloud Natural Langrage,](https://cloud.google.com/natural-language/docs/quickstart-client-libraries#client-libraries-usage-ruby)
 [Cloud Translation](https://cloud.google.com/translate/docs/quickstart-client-libraries)
 
 ## Usability goals
 * Analysize the article and generate the keywords
 * Translate the keywords
 * Search pictures with keywords
-* Display keywords and pictures in disigned layout. 
+* Display keywords and pictures in disigned layout.
 
 ## Usage:
 
 **Installation**
-``` 
+```
 $ bundle install
 ```
 
@@ -36,10 +36,10 @@ $ export GOOGLE_APPLICATION_CREDENTIALS= "config/google_credential.json"
 **Search a picture with keyword**
 ```ruby
 include SeoAssistant
-search_pic = Unsplash_API.new("dog")
-puts search_pic.get_picture.url
+search_pic = Unsplash.new(<UNSPLASH_ACCESS_KEY>, "dog")
+puts search_pic.process.first_url
 ```
-> <picture_link>
+> <dog_picture_link>
 
 **Translate to English**
 ```ruby

@@ -1,10 +1,12 @@
-source'https://rubygems.org'
+# frozen_string_literal: false
+
+source 'https://rubygems.org'
 ruby '2.5.1'
 
 #  Networking
 gem'http',  '~>  3.0'
 
-#Testing
+# Testing
 gem'minitest'
 gem'minitest-rg'
 gem'rake'
@@ -17,12 +19,9 @@ gem'flog'
 gem'reek'
 gem'rubocop'
 
-
-#Google Cloud API
+# Google Cloud API
 gem'google-cloud-language'
 gem'google-cloud-translate'
 
-
-#Upsplash
+# Upsplash
 gem 'unsplash'
-
