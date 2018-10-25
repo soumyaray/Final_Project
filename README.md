@@ -35,29 +35,30 @@ $ export GOOGLE_APPLICATION_CREDENTIALS= "config/google_credential.json"
 
 **Search a picture with keyword**
 ```ruby
-include SeoAssistant
-search_pic = Unsplash.new(<UNSPLASH_ACCESS_KEY>, "dog")
-puts search_pic.process.first_url
+CONFIG = YAML.safe_load(File.read('../../../config/secrets.yml'))
+UNSPLASH_ACCESS_KEY = CONFIG['UNSPLASH_ACCESS_KEY']
+search_pic = SeoAssistant::OutAPI::Unsplash.new(UNSPLASH_ACCESS_KEY, "dog")
+puts search_pic.process['results'][0]['urls']['raw'] #string
 ```
-> <dog_picture_link>
+> <dog_picture_first_url>
 
 **Translate to English**
 ```ruby
-include SeoAssistant
-translate_word = Translate.new("狗")
-puts translate_word.process
+include SeoAssistant::OutAPI
+translate_word = Translate.new("狗,貓,公車")
+puts translate_word.process #string
 ```
-> "dog"
+> "Dog, cat, bus"
 
 **Analyze article**
 ```ruby
-include SeoAssistant
+include SeoAssistant::OutAPI
 article = "Google, headquartered in Mountain View, unveiled the new Android phone at the Consumer Electronic Show./
             Sundar Pichai said in his keynote that users love their new Android phones."
 analyze_article = Analyze.new(article)
-puts analyze_article.process.keyword
-puts analyze_article.process.type
-puts analyze_article.process.importance
+puts analyze_article.process.keyword #array
+puts analyze_article.process.type #array
+puts analyze_article.process.importance #array
 ```
 > Google   users   phone   Android   Sundar Pichai   Mountain View   Consumer Electronic Show   phones   keynote
 
