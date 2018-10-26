@@ -1,9 +1,6 @@
 # frozen_string_literal: false
 
 require 'http'
-require 'yaml'
-require 'unsplash'
-require_relative 'picture.rb'
 
 module SeoAssistant
   module OutAPI

@@ -1,14 +1,16 @@
+require_relative 'keyword_mapper.rb'
+require_relative 'url_mapper.rb'
+
 module SeoAssistant
   module OutAPI
     class AnswerMapper
-      def initialize(unsplash_access_key, article)
+      def initialize(unsplash_access_key)
         @access_key = unsplash_access_key
-        @text = article
-        @analyze_class = OutAPI::Analyze
+        @analyze_class = SeoAssistant::OutAPI::Analyze
       end
 
-      def process()
-        results = @analyze_class.new(@text).process
+      def process(text)
+        results = @analyze_class.new(text).process
         build_entity(results)
         
       end

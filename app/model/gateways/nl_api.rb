@@ -1,7 +1,6 @@
 # frozen_string_literal: false
 
 require 'google/cloud/language'
-require_relative 'entities.rb'
 
 module SeoAssistant
   module OutAPI
@@ -20,11 +19,3 @@ module SeoAssistant
     end
   end
 end
-
-
-include SeoAssistant::OutAPI
-article = "Google, headquartered in Mountain View, unveiled the new Android phone at the Consumer Electronic Show./
-            Sundar Pichai said in his keynote that users love their new Android phones."
-analyze_article = Analyze.new(article)
-puts analyze_article.process.first
-

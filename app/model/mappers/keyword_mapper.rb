@@ -1,3 +1,5 @@
+require_relative 'url_mapper.rb'
+
 module SeoAssistant
   module OutAPI
     class KeywordMapper
@@ -5,7 +7,7 @@ module SeoAssistant
         @access_key = unsplash_access_key
       end
 
-      def load_several(result)
+      def load_several(results)
         results.map do |each_result|
           KeywordMapper.build_entity(each_result)
         end

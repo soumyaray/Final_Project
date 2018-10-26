@@ -35,6 +35,7 @@ $ export GOOGLE_APPLICATION_CREDENTIALS= "config/google_credential.json"
 
 **Search a picture with keyword**
 ```ruby
+require 'yaml'
 CONFIG = YAML.safe_load(File.read('../../../config/secrets.yml'))
 UNSPLASH_ACCESS_KEY = CONFIG['UNSPLASH_ACCESS_KEY']
 search_pic = SeoAssistant::OutAPI::Unsplash.new(UNSPLASH_ACCESS_KEY, "dog")
@@ -65,3 +66,15 @@ puts analyze_article.process.importance #array
 > ORGANIZATION   PERSON   CONSUMER_GOOD   CONSUMER_GOOD   PERSON   LOCATION   EVENT   CONSUMER_GOOD   OTHER
 
 > 0.22637900710105896   0.191544771194458   0.18347220122814178   0.09827315807342529   0.09172182530164719   0.07637178152799606   0.05269023776054382   0.052234947681427   0.027312073856592
+
+
+**Overall usage**
+```ruby
+require 'yaml'
+CONFIG = YAML.safe_load(File.read('../../../config/secrets.yml'))
+UNSPLASH_ACCESS_KEY = CONFIG['UNSPLASH_ACCESS_KEY']
+puts UNSPLASH_ACCESS_KEY
+answer = SeoAssistant::OutAPI::AnswerMapper.new(UNSPLASH_ACCESS_KEY).process("dog is cute")
+puts answer.keywords[0].url.first_pic
+```
+> not confirmed yet
