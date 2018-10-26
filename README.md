@@ -51,15 +51,15 @@ puts translate_word.process #string
 ```
 > "Dog, cat, bus"
 
-**Analyze article**
+**Analyze text**
 ```ruby
 include SeoAssistant::OutAPI
-article = "Google, headquartered in Mountain View, unveiled the new Android phone at the Consumer Electronic Show./
+text = "Google, headquartered in Mountain View, unveiled the new Android phone at the Consumer Electronic Show./
             Sundar Pichai said in his keynote that users love their new Android phones."
-analyze_article = Analyze.new(article)
-puts analyze_article.process.keyword #array
-puts analyze_article.process.type #array
-puts analyze_article.process.importance #array
+analyze_text = Analyze.new(text)
+puts analyze_text.process.keyword #array
+puts analyze_text.process.type #array
+puts analyze_text.process.importance #array
 ```
 > Google   users   phone   Android   Sundar Pichai   Mountain View   Consumer Electronic Show   phones   keynote
 

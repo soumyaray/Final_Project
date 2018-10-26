@@ -29,3 +29,9 @@ gem 'unsplash'
 #Entity gems
 gem 'dry-struct', '~> 0.5'
 gem 'dry-types', '~> 0.5'
+
+#Debuging
+gem 'pry'
+
+#Utilities
+gem 'rake'
