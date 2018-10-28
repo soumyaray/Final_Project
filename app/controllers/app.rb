@@ -2,7 +2,7 @@
 require 'roda'
 require 'slim'
 
-module CodePraise
+module SeoAssistant
   # Web App
   class App < Roda
     plugin :render, engine: 'slim', views: 'app/views'
@@ -21,17 +21,17 @@ module CodePraise
         routing.is do
           # GET /project/
           routing.post do
-            text = routing.params['text'].downcase
+            text = routing.params['text']
             routing.halt 400 if (text.empty?)
 
             routing.redirect "answer"
           end
         end
 
-        routing.on String, String do |text|
+        routing.on 'result' do 
           # GET /project/owner/project
           routing.get do
-            result = OutAPI::AnswerMapper
+            result = SeoAssistant::OutAPI::AnswerMapper
             .new(UNSPLASH_ACCESS_KEY)
             .process(text)
 
