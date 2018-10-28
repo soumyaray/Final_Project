@@ -1,3 +1,5 @@
+require_relative 'url.rb'
+
 module SeoAssistant
   module Entity
     class Keyword < Dry::Struct
@@ -5,9 +7,9 @@ module SeoAssistant
       
       attribute :keyword, Strict::String
       attribute :eng_keyword, Strict::String
-      attribute :type, Strict::String
+      attribute :type, Strict::Symbol
       attribute :importance, Strict::Float
-      attribute :urls, Strict::Array.of(Url)
+      attribute :urls, Url
     end
   end
 end

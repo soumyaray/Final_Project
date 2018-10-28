@@ -35,3 +35,8 @@ gem 'pry'
 
 #Utilities
 gem 'rake'
+
+# Web application related
+gem 'puma', '~> 3.11'
+gem 'roda', '~> 3.8'
+gem 'slim', '~> 3.0'

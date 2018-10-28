@@ -9,22 +9,22 @@ module SeoAssistant
 
       def load_several(results)
         results.map do |each_result|
-          KeywordMapper.build_entity(each_result)
+          KeywordMapper.build_entity(@access_key, each_result)
         end
       end
 
-      def self.build_entity()
-        DataMapper.new(@access_key, each_result).build_entity
+      def self.build_entity(access_key, each_result)
+        DataMapper.new(access_key, each_result).build_entity
       end
 
       class DataMapper
         def initialize(access_key, each_result)
           @access_key = access_key
           @keyword = each_result.name
-          @eng_keyword = eng_keyword(@keyword)
           @type = each_result.type
           @importance = each_result.salience
           @translate_class = SeoAssistant::OutAPI::Translate
+          @eng_keyword = @translate_class.new(@keyword).process
         end
 
         def build_entity()
@@ -33,12 +33,8 @@ module SeoAssistant
             eng_keyword: @eng_keyword,
             type: @type,
             importance: @importance,
-            url: url
+            urls: url
           )
-        end
-
-        def eng_keyword()
-          @translate_class.new(@keyword).process
         end
 
         def url()

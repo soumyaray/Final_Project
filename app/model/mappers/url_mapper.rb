@@ -1,6 +1,6 @@
 module SeoAssistant
     module OutAPI
-      class KeywordMapper
+      class UrlMapper
         def initialize(unsplash_access_key)
           @access_key = unsplash_access_key
           @searchPic_class = SeoAssistant::OutAPI::Unsplash
@@ -28,12 +28,12 @@ module SeoAssistant
           end
   
           def first_pic()
-            @pictures_data[0]['urls']['raw']
+            @pictures_data[0]['urls']['raw'].to_s
           end
   
           def random_1_pic()
-            num = 1 + Random.rand(@pictures_data.length)
-            @pictures_data[num]['urls']['raw']
+            num = 1 + rand(@pictures_data.length)
+            @pictures_data[num]['urls']['raw'].to_s
           end
         end
       end

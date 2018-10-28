@@ -1,3 +1,5 @@
+require_relative 'keywords.rb'
+
 module SeoAssistant
   module Entity
     class Answers < Dry::Struct
