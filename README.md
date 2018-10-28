@@ -73,8 +73,11 @@ puts analyze_text.process.importance #array
 CONFIG = YAML.safe_load(File.read('config/secrets.yml'))
 UNSPLASH_ACCESS_KEY = CONFIG['UNSPLASH_ACCESS_KEY']
 answer = SeoAssistant::OutAPI::AnswerMapper.new(UNSPLASH_ACCESS_KEY).process("狗是最好的朋友")
-puts answer.keywords[0].keyword
-puts answer.keywords[0].urls.random_1_pic
+puts answer.each_keyword #array
+puts answer.num_keyword
+puts answer.keywords[0].urls.random_1_pic #string
 ```
 > "狗"
+> "朋友"
+> 2
 > <dog_picture_random_url>

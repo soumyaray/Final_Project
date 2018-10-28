@@ -27,12 +27,22 @@ module SeoAssistant
 
         def build_entity
           SeoAssistant::Entity::Answers.new(
-            keywords: keywords
+            keywords: keywords,
+            each_keyword: each_keyword,
+            num_keyword: num_keyword
           )
         end
 
         def keywords()
           KeywordMapper.new(@access_key).load_several(@results)
+        end
+
+        def each_keyword()
+          @results.map(&:name)
+        end
+
+        def num_keyword()
+          @results.map(&:name).length
         end
       end
     end
