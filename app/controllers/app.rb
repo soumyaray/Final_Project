@@ -23,14 +23,15 @@ module SeoAssistant
           routing.post do
             text = routing.params['text']
             routing.halt 400 if (text.empty?)
-
+            puts UNSPLASH_ACCESS_KEY
             routing.redirect "answer/#{text}"
           end
         end
 
         routing.on String, String do |text| 
-          # GET /project/owner/project
+          # GET /answer/text
           routing.get do
+            puts UNSPLASH_ACCESS_KEY
             answer = SeoAssistant::OutAPI::AnswerMapper.new(UNSPLASH_ACCESS_KEY).process(text)
             view 'answer', locals: { answer: answer }
           end
