@@ -32,7 +32,7 @@ module SeoAssistant
           end
   
           def random_1_pic()
-            num = 1 + rand(@pictures_data.length)
+            num = rand(@pictures_data.length)
             @pictures_data[num]['urls']['raw'].to_s
           end
         end

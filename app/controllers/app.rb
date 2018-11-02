@@ -1,6 +1,7 @@
 #not yet finished
 require 'roda'
 require 'slim'
+require 'uri'
 
 module SeoAssistant
   # Web App
@@ -17,22 +18,23 @@ module SeoAssistant
         view 'home'
       end
 
-      routing.on 'analyze_text' do
+      routing.on 'answer' do
         routing.is do
           # GET /project/
           routing.post do
-            text = routing.params['text']
+            text = routing.params['text'].to_s
             routing.halt 400 if (text.empty?)
-            puts UNSPLASH_ACCESS_KEY
             routing.redirect "answer/#{text}"
           end
         end
 
-        routing.on String, String do |text| 
+        routing.on String do |text| 
           # GET /answer/text
           routing.get do
-            puts UNSPLASH_ACCESS_KEY
-            answer = SeoAssistant::OutAPI::AnswerMapper.new(UNSPLASH_ACCESS_KEY).process(text)
+            content = text.encode('UTF-8', invalid: :replace, undef: :replace)
+            new_content = URI.unescape(content).to_s
+            answer = SeoAssistant::OutAPI::AnswerMapper.new(UNSPLASH_ACCESS_KEY).process(new_content)
+            puts answer.each_keyword #array 
             view 'answer', locals: { answer: answer }
           end
         end
