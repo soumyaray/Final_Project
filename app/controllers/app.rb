@@ -28,11 +28,11 @@ module SeoAssistant
           end
         end
 
-        routing.on String, String do |text| 
+        routing.on String, String do |text|
           # GET /answer/text
           routing.get do
             puts UNSPLASH_ACCESS_KEY
-            answer = SeoAssistant::OutAPI::AnswerMapper.new(UNSPLASH_ACCESS_KEY).process(text)
+            answer = SeoAssistant::OutAPI::AnswerMapper.new(GOOGLE_CONFIG, UNSPLASH_ACCESS_KEY).process(text)
             view 'answer', locals: { answer: answer }
           end
         end
