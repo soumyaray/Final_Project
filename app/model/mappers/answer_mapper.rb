@@ -4,24 +4,26 @@ require_relative 'url_mapper.rb'
 module SeoAssistant
   module OutAPI
     class AnswerMapper
-      def initialize(unsplash_access_key)
-        @access_key = unsplash_access_key
+      def initialize(google_config, unsplash_access_key)
+        @google_config = google_config
+        @unsplash_key = unsplash_access_key
         @analyze_class = SeoAssistant::OutAPI::Analyze
       end
 
       def process(text)
-        results = @analyze_class.new(text).process
+        results = @analyze_class.new(@google_config, text).process
         build_entity(results)
-        
+
       end
 
       def build_entity(results)
-        DataMapper.new(@access_key, results).build_entity
+        DataMapper.new(@google_config, @unsplash_key, results).build_entity
       end
 
       class DataMapper
-        def initialize(access_key, results)
-          @access_key = access_key
+        def initialize(google_config, unsplash_access_key, results)
+          @google_config = google_config
+          @unsplash_key = unsplash_access_key
           @results = results
         end
 
@@ -34,7 +36,7 @@ module SeoAssistant
         end
 
         def keywords()
-          KeywordMapper.new(@access_key).load_several(@results)
+          KeywordMapper.new(@google_config, @unsplash_key).load_several(@results)
         end
 
         def each_keyword()

@@ -28,13 +28,13 @@ module SeoAssistant
           end
         end
 
-        routing.on String do |text| 
+        routing.on String, String do |text|
           # GET /answer/text
           routing.get do
+            puts UNSPLASH_ACCESS_KEY
             content = text.encode('UTF-8', invalid: :replace, undef: :replace)
             new_content = URI.unescape(content).to_s
-            answer = SeoAssistant::OutAPI::AnswerMapper.new(UNSPLASH_ACCESS_KEY).process(new_content)
-            puts answer.each_keyword #array 
+            answer = SeoAssistant::OutAPI::AnswerMapper.new(GOOGLE_CONFIG, UNSPLASH_ACCESS_KEY).process(new_content)
             view 'answer', locals: { answer: answer }
           end
         end
