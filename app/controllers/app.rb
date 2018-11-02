@@ -20,7 +20,7 @@ module SeoAssistant
 
       routing.on 'answer' do
         routing.is do
-          # GET /project/
+          # GET /answer/
           routing.post do
             text = routing.params['text'].to_s
             routing.halt 400 if (text.empty?)
@@ -28,13 +28,12 @@ module SeoAssistant
           end
         end
 
-        routing.on String, String do |text|
+        routing.on String do |text|
           # GET /answer/text
           routing.get do
-            puts UNSPLASH_ACCESS_KEY
-            content = text.encode('UTF-8', invalid: :replace, undef: :replace)
-            new_content = URI.unescape(content).to_s
-            answer = SeoAssistant::OutAPI::AnswerMapper.new(GOOGLE_CONFIG, UNSPLASH_ACCESS_KEY).process(new_content)
+            text_encoded = text.encode('UTF-8', invalid: :replace, undef: :replace)
+            text_unescaped = URI.unescape(text_encoded).to_s
+            answer = SeoAssistant::OutAPI::AnswerMapper.new(GOOGLE_CONFIG, UNSPLASH_ACCESS_KEY).process(text_unescaped)
             view 'answer', locals: { answer: answer }
           end
         end
