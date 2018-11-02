@@ -71,9 +71,7 @@ puts analyze_text.process.importance #array
 **Overall usage**
 ```ruby
 require 'yaml'
-CONFIG = YAML.safe_load(File.read('config/secrets.yml'))
-UNSPLASH_ACCESS_KEY = CONFIG['UNSPLASH_ACCESS_KEY']
-answer = SeoAssistant::OutAPI::AnswerMapper.new(UNSPLASH_ACCESS_KEY).process("狗是最好的朋友")
+answer = SeoAssistant::OutAPI::AnswerMapper.new(GOOGLE_CONFIG, UNSPLASH_ACCESS_KEY).process("狗是最好的朋友")
 puts answer.each_keyword #array
 puts answer.num_keyword
 puts answer.keywords[0].urls.random_1_pic #string

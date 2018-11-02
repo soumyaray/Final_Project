@@ -40,3 +40,6 @@ gem 'rake'
 gem 'puma', '~> 3.11'
 gem 'roda', '~> 3.8'
 gem 'slim', '~> 3.0'
+
+# Data parsing 
+gem 'json'
