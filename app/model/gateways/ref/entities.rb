@@ -18,5 +18,9 @@ module SeoAssistant
     def importance
       @entities.map(&:salience)
     end
+
+    def first
+      @entities[0]
+    end
   end
 end

@@ -25,3 +25,21 @@ gem'google-cloud-translate'
 
 # Upsplash
 gem 'unsplash'
+
+#Entity gems
+gem 'dry-struct', '~> 0.5'
+gem 'dry-types', '~> 0.5'
+
+#Debuging
+gem 'pry'
+
+#Utilities
+gem 'rake'
+
+# Web application related
+gem 'puma', '~> 3.11'
+gem 'roda', '~> 3.8'
+gem 'slim', '~> 3.0'
+
+# Data parsing 
+gem 'json'

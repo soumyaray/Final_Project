@@ -30,37 +30,53 @@ $ bundle install
 
 **Google path setting**
 ```
-$ export GOOGLE_APPLICATION_CREDENTIALS= "config/google_credential.json"
+$ export GOOGLE_APPLICATION_CREDENTIALS="config/google_credential.json"
 ```
 
 **Search a picture with keyword**
 ```ruby
-include SeoAssistant
-search_pic = Unsplash.new(<UNSPLASH_ACCESS_KEY>, "dog")
-puts search_pic.process.first_url
+require 'yaml'
+CONFIG = YAML.safe_load(File.read('../../../config/secrets.yml'))
+UNSPLASH_ACCESS_KEY = CONFIG['UNSPLASH_ACCESS_KEY']
+search_pic = SeoAssistant::OutAPI::Unsplash.new(UNSPLASH_ACCESS_KEY, "dog")
+puts search_pic.process['results'][0]['urls']['raw'] #string
 ```
-> <dog_picture_link>
+> <dog_picture_first_url>
 
 **Translate to English**
 ```ruby
-include SeoAssistant
-translate_word = Translate.new("狗")
-puts translate_word.process
+include SeoAssistant::OutAPI
+translate_word = Translate.new("狗,貓,公車")
+puts translate_word.process #string
 ```
-> "dog"
+> "Dog, cat, bus"
 
-**Analyze article**
+**Analyze text**
 ```ruby
-include SeoAssistant
-article = "Google, headquartered in Mountain View, unveiled the new Android phone at the Consumer Electronic Show./
+include SeoAssistant::OutAPI
+text = "Google, headquartered in Mountain View, unveiled the new Android phone at the Consumer Electronic Show./
             Sundar Pichai said in his keynote that users love their new Android phones."
-analyze_article = Analyze.new(article)
-puts analyze_article.process.keyword
-puts analyze_article.process.type
-puts analyze_article.process.importance
+analyze_text = Analyze.new(text)
+puts analyze_text.process.keyword #array
+puts analyze_text.process.type #array
+puts analyze_text.process.importance #array
 ```
 > Google   users   phone   Android   Sundar Pichai   Mountain View   Consumer Electronic Show   phones   keynote
 
 > ORGANIZATION   PERSON   CONSUMER_GOOD   CONSUMER_GOOD   PERSON   LOCATION   EVENT   CONSUMER_GOOD   OTHER
 
 > 0.22637900710105896   0.191544771194458   0.18347220122814178   0.09827315807342529   0.09172182530164719   0.07637178152799606   0.05269023776054382   0.052234947681427   0.027312073856592
+
+
+**Overall usage**
+```ruby
+require 'yaml'
+answer = SeoAssistant::OutAPI::AnswerMapper.new(GOOGLE_CONFIG, UNSPLASH_ACCESS_KEY).process("狗是最好的朋友")
+puts answer.each_keyword #array
+puts answer.num_keyword
+puts answer.keywords[0].urls.random_1_pic #string
+```
+> "狗"
+> "朋友"
+> 2
+> <dog_picture_random_url>
