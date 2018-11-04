@@ -33,13 +33,17 @@ gem 'dry-types', '~> 0.5'
 #Debuging
 gem 'pry'
 
-#Utilities
-gem 'rake'
-
 # Web application related
 gem 'puma', '~> 3.11'
 gem 'roda', '~> 3.8'
 gem 'slim', '~> 3.0'
+gem 'econfig', '~> 2.1'
 
-# Data parsing 
-gem 'json'
+# Database related
+gem 'hirb'
+gem 'sequel'
+
+group :development, :test do
+  gem 'database_cleaner'
+  gem 'sqlite3'
+end

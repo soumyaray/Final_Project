@@ -1,27 +1,22 @@
 # frozen_string_literal: false
 
+ENV['RACK_ENV'] = 'test'
+
 require 'simplecov'
 SimpleCov.start
 
 require 'yaml'
+
 require 'minitest/autorun'
 require 'minitest/rg'
-require 'vcr'
-require 'webmock'
 
-require_relative '../lib/unsplash_api.rb'
-require_relative '../lib/translate_api.rb'
+require 'pry' # for debugging
 
-KEYWORD_C = '狗'.freeze
-KEYWORD_E = 'dog'.freeze
+require_relative '../init.rb'
 
-CONFIG = YAML.safe_load(File.read('config/secrets.yml'))
-ACCESS_KEY = CONFIG['UNSPLASH_ACCESS_KEY']
-SECRET_KEY = CONFIG['UNSPLASH_SECRET_KEY']
+SCRIPT = '狗是我們的好朋友'.freeze
+KEYWORD = 'dog'
 
+UNSPLASH_ACCESS_KEY = SeoAssistant::App.config.UNSPLASH_ACCESS_KEY
+GOOGLE_CREDS = SeoAssistant::App.config.GOOGLE_CREDS
 CORRECT = YAML.safe_load(File.read('spec/fixtures/api_result.yml'))
-
-CASSETTES_FOLDER = 'spec/fixtures/cassettes'.freeze
-CASSETTE_FILE_UNSPLASH = 'unsplash_api'.freeze
-CASSETTE_FILE_TRANSLATE = 'translate_api'.freeze
-CASSETTE_FILE_NL = 'nl_api'.freeze

@@ -1,8 +1,8 @@
 # frozen_string_literal: false
 
 module SeoAssistant
-  # Model of Entities
-  class Entities
+  # Model of NL_Entities
+  class NL_Entities
     def initialize(entities)
       @entities = entities
     end

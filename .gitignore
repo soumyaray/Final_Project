@@ -1,4 +1,5 @@
-config/google_credential.json
+config/secrets_google.yml
 config/secrets.yml
 spec/fixtures/
 coverage/
+*.db

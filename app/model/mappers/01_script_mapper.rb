@@ -1,9 +1,9 @@
-require_relative 'keyword_mapper.rb'
-require_relative 'url_mapper.rb'
+require_relative '02_keyword_mapper.rb'
+require_relative '03_url_mapper.rb'
 
 module SeoAssistant
   module OutAPI
-    class AnswerMapper
+    class ScriptMapper
       def initialize(google_config, unsplash_access_key)
         @google_config = google_config
         @unsplash_key = unsplash_access_key
@@ -28,7 +28,7 @@ module SeoAssistant
         end
 
         def build_entity
-          SeoAssistant::Entity::Answers.new(
+          SeoAssistant::Entity::Script.new(
             keywords: keywords,
             each_keyword: each_keyword,
             num_keyword: num_keyword

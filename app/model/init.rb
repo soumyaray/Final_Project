@@ -1,4 +1,4 @@
-%w[entities gateways mappers]
+%w[entities mappers]
 .each do |folder|
     require_relative "#{folder}/init.rb"
 end
