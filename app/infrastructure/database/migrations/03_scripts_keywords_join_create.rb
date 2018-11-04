@@ -4,13 +4,12 @@ require 'sequel'
 
 Sequel.migration do
   change do
-    create_table(:scripts_keywords_urls) do
-      primary_key [:script_id, :keyword_id, :url_id]
+    create_table(:scripts_keywords) do
+      primary_key [:script_id, :keyword_id]
       foreign_key :script_id, :scripts
       foreign_key :keyword_id, :keywords
-      foreign_key :url_id, :urls
 
-      index [:script_id, :keyword_id, :url_id]
+      index [:script_id, :keyword_id]
     end
   end
 end

@@ -6,7 +6,7 @@ Sequel.migration do
   change do
     create_table(:keywords) do
       primary_key :id
-      foreign_key :text_id, :scripts
+      foreign_key :script_id, :scripts
 
       String      :keyword
       String      :eng_keyword
