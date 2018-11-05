@@ -12,23 +12,25 @@ module SeoAssistant
 
       def process(text)
         results = @analyze_class.new(@google_config, text).process
-        build_entity(results)
+        build_entity(text, results)
 
       end
 
-      def build_entity(results)
-        DataMapper.new(@google_config, @unsplash_key, results).build_entity
+      def build_entity(text, results)
+        DataMapper.new(@google_config, @unsplash_key, text, results).build_entity
       end
 
       class DataMapper
-        def initialize(google_config, unsplash_access_key, results)
+        def initialize(google_config, unsplash_access_key, text, results)
           @google_config = google_config
           @unsplash_key = unsplash_access_key
+          @text = text
           @results = results
         end
 
         def build_entity
           SeoAssistant::Entity::Script.new(
+            text: @text,
             keywords: keywords,
             each_keyword: each_keyword,
             num_keyword: num_keyword

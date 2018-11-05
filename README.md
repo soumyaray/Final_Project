@@ -66,10 +66,10 @@ puts analyze_text.process.importance #array
 **Overall usage**
 ```ruby
 require 'yaml'
-answer = SeoAssistant::OutAPI::AnswerMapper.new(GOOGLE_CONFIG, UNSPLASH_ACCESS_KEY).process("狗是最好的朋友")
-puts answer.each_keyword #array
-puts answer.num_keyword
-puts answer.keywords[0].urls.random_1_pic #string
+script = SeoAssistant::OutAPI::ScriptMapper.new(GOOGLE_CONFIG, UNSPLASH_ACCESS_KEY).process("狗是最好的朋友")
+puts script.each_keyword #array
+puts script.num_keyword
+puts script.keywords[0].urls.random_1_pic #string
 ```
 > "狗"
 > "朋友"
