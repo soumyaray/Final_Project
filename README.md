@@ -74,8 +74,7 @@ puts analyze_text.process.importance #array
 
 **Overall usage**
 ```ruby
-require 'yaml'
-script = SeoAssistant::OutAPI::ScriptMapper.new(GOOGLE_CONFIG, UNSPLASH_ACCESS_KEY).process("狗是最好的朋友")
+script = SeoAssistant::OutAPI::ScriptMapper.new(App.config.GOOGLE_CREDS, App.config.UNSPLASH_ACCESS_KEY).process("狗是最好的朋友")
 puts script.each_keyword #array
 puts script.num_keyword
 puts script.keywords[0].urls.random_1_pic #string

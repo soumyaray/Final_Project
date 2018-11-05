@@ -33,7 +33,7 @@ module SeoAssistant
           routing.get do
             text_encoded = text.encode('UTF-8', invalid: :replace, undef: :replace)
             text_unescaped = URI.unescape(text_encoded).to_s
-            answer = SeoAssistant::OutAPI::ScriptMapper.new(APP.config.GOOGLE_CREDS, APP.config.UNSPLASH_ACCESS_KEY).process(text_unescaped)
+            answer = SeoAssistant::OutAPI::ScriptMapper.new(App.config.GOOGLE_CREDS, App.config.UNSPLASH_ACCESS_KEY).process(text_unescaped)
             view 'answer', locals: { answer: answer }
           end
         end
