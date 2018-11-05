@@ -28,6 +28,15 @@ Here are the links of APIs we use:
 $ bundle install
 ```
 
+**Create databes**
+```
+$ rake db:migrate
+or
+$ RACK_ENV=test rake db:migrate
+```
+
+
+
 **Search a picture with keyword**
 ```ruby
 require 'yaml'
