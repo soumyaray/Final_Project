@@ -28,7 +28,7 @@ module SeoAssistant
 
             # Get script from API
             script = OutAPI::ScriptMapper
-              .new(App.config.GOOGLE_CREDS, App.config.UNSPLASH_ACCESS_KEY)
+              .new(JSON.parse(App.config.GOOGLE_CREDS), App.config.UNSPLASH_ACCESS_KEY)
               .process(text)
 
             # Add script to database
@@ -44,10 +44,10 @@ module SeoAssistant
             text_encoded = text.encode('UTF-8', invalid: :replace, undef: :replace)
             text_unescaped = URI.unescape(text_encoded).to_s
             #answer = SeoAssistant::OutAPI::ScriptMapper.new(App.config.GOOGLE_CREDS, App.config.UNSPLASH_ACCESS_KEY).process(text_unescaped)
-            
+
             script = Repository::For.klass(Entity::Script)
             .find_text(text_unescaped)
-            
+
             view 'answer', locals: { answer: script }
           end
         end

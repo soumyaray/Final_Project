@@ -22,6 +22,11 @@ task :rerack do
   sh "rerun -c rackup --ignore 'coverage/*'"
 end
 
+desc 'Format google credentials for injection into secrets.yml'
+task :google_creds do
+  puts File.read('config/google_credential.json').split("\n").join(' ')
+end
+
 
 namespace :db do
   task :config do
@@ -29,14 +34,14 @@ namespace :db do
     require_relative 'config/environment.rb' # load config info
     def app; SeoAssistant::App; end
   end
-  
+
   desc 'Run migrations'
   task :migrate => :config do
     Sequel.extension :migration
     puts "Migrating #{app.environment} database to latest"
     Sequel::Migrator.run(app.DB, 'app/infrastructure/database/migrations')
   end
-  
+
   desc 'Wipe records from all tables'
   task :wipe => :config do
     require_relative 'spec/helpers/database_helper.rb'
