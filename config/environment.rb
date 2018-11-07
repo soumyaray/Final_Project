@@ -22,7 +22,6 @@ module SeoAssistant
 
     configure :development, :test do
       ENV['DATABASE_URL'] = 'sqlite://' + config.DB_FILENAME
-      GOOGLE_CREDENTIALS
     end
 
     configure :production do

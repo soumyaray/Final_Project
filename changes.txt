@@ -1,0 +1,95 @@
+diff --git a/.gitignore b/.gitignore
+index 5ff302f..77dfad2 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,4 +1,5 @@
+ config/secrets.yml
++config/*.json
+ spec/fixtures/
+ coverage/
+ *.db
+\ No newline at end of file
+diff --git a/Rakefile b/Rakefile
+index 227197c..b58d09e 100644
+--- a/Rakefile
++++ b/Rakefile
+@@ -22,6 +22,11 @@ task :rerack do
+   sh "rerun -c rackup --ignore 'coverage/*'"
+ end
+ 
++desc 'Format google credentials for injection into secrets.yml'
++task :google_creds do
++  puts File.read('config/google_credential.json').split("\n").join(' ')
++end
++
+ 
+ namespace :db do
+   task :config do
+@@ -29,14 +34,14 @@ namespace :db do
+     require_relative 'config/environment.rb' # load config info
+     def app; SeoAssistant::App; end
+   end
+-  
++
+   desc 'Run migrations'
+   task :migrate => :config do
+     Sequel.extension :migration
+     puts "Migrating #{app.environment} database to latest"
+     Sequel::Migrator.run(app.DB, 'app/infrastructure/database/migrations')
+   end
+-  
++
+   desc 'Wipe records from all tables'
+   task :wipe => :config do
+     require_relative 'spec/helpers/database_helper.rb'
+diff --git a/app/controllers/app.rb b/app/controllers/app.rb
+index 35c1c06..51a5a6e 100644
+--- a/app/controllers/app.rb
++++ b/app/controllers/app.rb
+@@ -28,7 +28,7 @@ module SeoAssistant
+ 
+             # Get script from API
+             script = OutAPI::ScriptMapper
+-              .new(App.config.GOOGLE_CREDS, App.config.UNSPLASH_ACCESS_KEY)
++              .new(JSON.parse(App.config.GOOGLE_CREDS), App.config.UNSPLASH_ACCESS_KEY)
+               .process(text)
+ 
+             # Add script to database
+@@ -44,14 +44,14 @@ module SeoAssistant
+             text_encoded = text.encode('UTF-8', invalid: :replace, undef: :replace)
+             text_unescaped = URI.unescape(text_encoded).to_s
+             #answer = SeoAssistant::OutAPI::ScriptMapper.new(App.config.GOOGLE_CREDS, App.config.UNSPLASH_ACCESS_KEY).process(text_unescaped)
+-            
++
+             script = Repository::For.klass(Entity::Script)
+             .find_text(text_unescaped)
+-            
++
+             view 'answer', locals: { answer: script }
+           end
+         end
+       end
+     end
+   end
+-end
+\ No newline at end of file
++end
+diff --git a/config/environment.rb b/config/environment.rb
+index 540b2bd..ffaf78b 100644
+--- a/config/environment.rb
++++ b/config/environment.rb
+@@ -22,6 +22,7 @@ module SeoAssistant
+ 
+     configure :development, :test do
+       ENV['DATABASE_URL'] = 'sqlite://' + config.DB_FILENAME
++      GOOGLE_CREDENTIALS
+     end
+ 
+     configure :production do
+@@ -37,4 +38,4 @@ module SeoAssistant
+       end
+     end
+   end
+-end
+\ No newline at end of file
++end

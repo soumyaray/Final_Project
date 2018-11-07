@@ -8,8 +8,8 @@ Sequel.migration do
       primary_key :id
 
       String      :text
-      String      :each_keyword
-      String      :num_keyword
+
+      index       :text
 
       DateTime :created_at
       DateTime :updated_at

@@ -10,9 +10,9 @@ Sequel.migration do
 
       String      :keyword
       String      :eng_keyword
-      Symbol      :type
+      String      :type
       Float       :importance
-      String      :url
+      String      :image_url
 
       DateTime :created_at
       DateTime :updated_at
