@@ -5,6 +5,8 @@ module SeoAssistant
   module OutAPI
     class ScriptMapper
       def initialize(google_config, unsplash_access_key)
+        puts @google_config
+        puts "OK"
         @google_config = google_config
         @unsplash_key = unsplash_access_key
         @analyze_class = SeoAssistant::OutAPI::Analyze
@@ -30,6 +32,7 @@ module SeoAssistant
 
         def build_entity
           SeoAssistant::Entity::Script.new(
+            id: nil,
             text: @text,
             keywords: keywords,
             each_keyword: each_keyword,

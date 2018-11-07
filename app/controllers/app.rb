@@ -1,4 +1,4 @@
-#not yet finished
+#finished but need confirmed
 require 'roda'
 require 'slim'
 require 'uri'
@@ -15,7 +15,8 @@ module SeoAssistant
 
       # GET /
       routing.root do
-        view 'home'
+        scripts = Repository::For.klass(Entity::Script).all
+        view 'home', locals: { scripts: scripts }
       end
 
       routing.on 'answer' do
@@ -24,6 +25,15 @@ module SeoAssistant
           routing.post do
             text = routing.params['text'].to_s
             routing.halt 400 if (text.empty?)
+
+            # Get script from API
+            script = OutAPI::ScriptMapper
+              .new(App.config.GOOGLE_CREDS, App.config.UNSPLASH_ACCESS_KEY)
+              .process(text)
+
+            # Add script to database
+            Repository::For.entity(script).create(script)
+
             routing.redirect "answer/#{text}"
           end
         end
@@ -33,8 +43,12 @@ module SeoAssistant
           routing.get do
             text_encoded = text.encode('UTF-8', invalid: :replace, undef: :replace)
             text_unescaped = URI.unescape(text_encoded).to_s
-            answer = SeoAssistant::OutAPI::ScriptMapper.new(App.config.GOOGLE_CREDS, App.config.UNSPLASH_ACCESS_KEY).process(text_unescaped)
-            view 'answer', locals: { answer: answer }
+            #answer = SeoAssistant::OutAPI::ScriptMapper.new(App.config.GOOGLE_CREDS, App.config.UNSPLASH_ACCESS_KEY).process(text_unescaped)
+            
+            script = Repository::For.klass(Entity::Script)
+            .find_text(text_unescaped)
+            
+            view 'answer', locals: { answer: script }
           end
         end
       end

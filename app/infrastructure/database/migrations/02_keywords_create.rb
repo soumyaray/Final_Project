@@ -12,6 +12,7 @@ Sequel.migration do
       String      :eng_keyword
       Symbol      :type
       Float       :importance
+      String      :url
 
       DateTime :created_at
       DateTime :updated_at

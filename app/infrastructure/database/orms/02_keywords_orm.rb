@@ -10,6 +10,11 @@ module SeoAssistant
                   class: :'SeoAssistant::Database::ScriptOrm'
 
       plugin :timestamps, update_on_create: true
+      
+      
+      def self.find_or_create(keyword_info)
+        first(keyword: keyword_info[:keyword]) || create(keyword_info)
+      end
     end
   end
 end

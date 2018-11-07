@@ -8,15 +8,15 @@ module SeoAssistant
           Database::ScriptOrm.all.map { |db_script| rebuild_entity(db_script) }
         end
   
-        def self.find_full_name(owner_name, project_name)
+        def self.find_text(text)
           # SELECT * FROM `projects` LEFT JOIN `members`
           # ON (`members`.`id` = `projects`.`owner_id`)
           # WHERE ((`username` = 'owner_name') AND (`name` = 'project_name'))
-          db_project = Database::ProjectOrm
-            .left_join(:members, id: :owner_id)
-            .where(username: owner_name, name: project_name)
+          db_script = Database::ScriptOrm
+            .left_join(:keywords, script_id: :id)
+            .where(text: text)
             .first
-          rebuild_entity(db_project)
+          rebuild_entity(db_script)
         end
   
         def self.find(entity)
@@ -34,10 +34,10 @@ module SeoAssistant
         end
   
         def self.create(entity)
-          raise 'Project already exists' if find(entity)
+          raise 'Script already exists' if find(entity)
   
-          db_project = PersistProject.new(entity).call
-          rebuild_entity(db_project)
+          db_script = PersistProject.new(entity).call
+          rebuild_entity(db_script)
         end
   
         private
@@ -45,10 +45,9 @@ module SeoAssistant
         def self.rebuild_entity(db_record)
           return nil unless db_record
   
-          Entity::Project.new(
+          Entity::Script.new(
             db_record.to_hash.merge(
-              owner: Members.rebuild_entity(db_record.owner),
-              contributors: Members.rebuild_many(db_record.contributors)
+              keywords: Keywords.rebuild_many(db_record.keywords)
             )
           )
         end
@@ -58,19 +57,15 @@ module SeoAssistant
           def initialize(entity)
             @entity = entity
           end
-  
-          def create_project
-            Database::ProjectOrm.create(@entity.to_attr_hash)
+          
+          def create_script
+            Database::ScriptOrm.create(@entity.to_attr_hash)
           end
   
           def call
-            owner = Members.db_find_or_create(@entity.owner)
-  
-            create_project.tap do |db_project|
-              db_project.update(owner: owner)
-  
-              @entity.contributors.each do |contributor|
-                db_project.add_contributor(Members.db_find_or_create(contributor))
+            create_script.tap do |db_script|
+              @entity.keywords.each do |keyword|
+                db_script.add_keyword(Keywords.db_find_or_create(contributor))
               end
             end
           end

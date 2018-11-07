@@ -3,14 +3,14 @@
 
 module SeoAssistant
     module Repository
-      # Repository for Members
+      # Repository for Keywords
       class Keywords
         def self.find_id(id)
-          rebuild_entity Database::MemberOrm.first(id: id)
+          rebuild_entity Database::KeywordOrm.first(id: id)
         end
   
-        def self.find_username(username)
-          rebuild_entity Database::MemberOrm.first(username: username)
+        def self.find_text(text)
+          rebuild_entity Database::KeywordOrm.first(text: text)
         end
   
         private
@@ -19,10 +19,12 @@ module SeoAssistant
           return nil unless db_record
   
           Entity::Member.new(
-            id:        db_record.id,
-            origin_id: db_record.origin_id,
-            username:  db_record.username,
-            email:     db_record.email
+            id:           db_record.id,
+            keyword:      db_record.keyword,
+            eng_keyword:  db_record.eng_keyword,
+            type:         db_record.type,
+            importance:   db_record.importance,
+            url:          db_record.url
           )
         end
   
@@ -33,7 +35,7 @@ module SeoAssistant
         end
   
         def self.db_find_or_create(entity)
-          Database::MemberOrm.find_or_create(entity.to_attr_hash)
+          Database::KeywordOrm.find_or_create(entity.to_attr_hash)
         end
       end
     end

@@ -31,11 +31,12 @@ module SeoAssistant
 
         def build_entity()
           SeoAssistant::Entity::Keyword.new(
+            id: nil,
             keyword: @keyword,
             eng_keyword: @eng_keyword,
             type: @type,
             importance: @importance,
-            urls: url
+            url: url
           )
         end
 
