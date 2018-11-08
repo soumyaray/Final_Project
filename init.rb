@@ -3,7 +3,7 @@
     require_relative "#{folder}/init.rb"
 end
 
-puts SeoAssistant::App.config.GOOGLE_CREDS
+#puts SeoAssistant::App.config.GOOGLE_CREDS
 
 
 script = SeoAssistant::OutAPI::ScriptMapper

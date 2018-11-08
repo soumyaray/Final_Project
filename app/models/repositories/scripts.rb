@@ -12,6 +12,10 @@ module SeoAssistant
           # SELECT * FROM `projects` LEFT JOIN `members`
           # ON (`members`.`id` = `projects`.`owner_id`)
           # WHERE ((`username` = 'owner_name') AND (`name` = 'project_name'))
+         
+          ###############
+          db_record = Database::ScriptOrm.find(text: text)
+          ###############
           db_script = Database::ScriptOrm
             .left_join(:keywords, script_id: :id)
             .where(text: text)
